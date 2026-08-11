@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Gender Warz™ | Join the War</title>
 <meta name="description" content="Join the Gender Warz War Floor as a member.">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
-:root{--bg:#050505;--panel:#101010;--line:#292929;--red:#ff3347;--white:#f7f7f7;--muted:#999}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#242424,#070707 45%,#030303);color:var(--white);font-family:Inter,Arial,sans-serif;min-height:100vh}.wrap{max-width:900px;margin:auto;padding:28px 20px 70px}.brand{font-weight:1000;letter-spacing:3px;font-size:15px}.brand span{color:var(--red)}.hero{text-align:center;padding:70px 0 35px}.tag{color:var(--red);font-size:10px;font-weight:900;letter-spacing:4px}.hero h1{font-size:clamp(52px,12vw,100px);line-height:.82;letter-spacing:-5px;margin:18px 0}.hero h1 span{color:var(--red)}.hero p{max-width:600px;margin:auto;color:var(--muted);line-height:1.6}.panel{max-width:520px;margin:25px auto;background:linear-gradient(145deg,#161616,#090909);border:1px solid var(--line);padding:30px;border-radius:16px}.tabs{display:flex;gap:8px;margin-bottom:22px}.tab{flex:1;padding:12px;border:1px solid #444;background:#0b0b0b;color:#aaa;border-radius:8px;font-weight:900;cursor:pointer}.tab.active{background:var(--red);border-color:var(--red);color:#fff}.field{margin:12px 0}.field label{display:block;font-size:11px;color:#aaa;margin-bottom:7px;text-transform:uppercase;letter-spacing:1px}.input,.select{width:100%;padding:14px;border-radius:8px;border:1px solid #3a3a3a;background:#090909;color:#fff;font-size:15px}.btn{width:100%;padding:14px;border-radius:999px;border:1px solid #444;background:#fff;color:#050505;font-weight:1000;cursor:pointer;margin-top:12px}.btn.red{background:var(--red);color:#fff;border-color:var(--red)}.msg{min-height:20px;color:#ff6574;font-size:12px;margin-top:12px;text-align:center}.success{color:#70e0a1}.profile{display:none}.profile.show{display:block}.auth.hide{display:none}.profile-card{border-top:1px solid #292929;margin-top:25px;padding-top:25px}.status{font-size:12px;color:#999;margin:12px 0}.logout{background:#111;color:#fff}.back{display:inline-block;color:#aaa;text-decoration:none;margin-top:25px;font-size:12px}.back:hover{color:#fff}
+:root{--bg:#050505;--panel:#101010;--line:#292929;--red:#ff3347;--white:#f7f7f7;--muted:#999}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#242424,#070707 45%,#030303);color:var(--white);font-family:Inter,Arial,sans-serif;min-height:100vh}.wrap{max-width:900px;margin:auto;padding:28px 20px 70px}.brand{font-weight:1000;letter-spacing:3px;font-size:15px}.brand span{color:var(--red)}.hero{text-align:center;padding:70px 0 35px}.tag{color:var(--red);font-size:10px;font-weight:900;letter-spacing:4px}.hero h1{font-size:clamp(52px,12vw,100px);line-height:.82;letter-spacing:-5px;margin:18px 0}.hero h1 span{color:var(--red)}.hero p{max-width:600px;margin:auto;color:var(--muted);line-height:1.6}.panel{max-width:520px;margin:25px auto;background:linear-gradient(145deg,#161616,#090909);border:1px solid var(--line);padding:30px;border-radius:16px}.tabs{display:flex;gap:8px;margin-bottom:22px}.tab{flex:1;padding:12px;border:1px solid #444;background:#0b0b0b;color:#aaa;border-radius:8px;font-weight:900;cursor:pointer}.tab.active{background:var(--red);border-color:var(--red);color:#fff}.field{margin:12px 0}.field label{display:block;font-size:11px;color:#aaa;margin-bottom:7px;text-transform:uppercase;letter-spacing:1px}.input,.select{width:100%;padding:14px;border-radius:8px;border:1px solid #3a3a3a;background:#090909;color:#fff;font-size:15px}.btn{width:100%;padding:14px;border-radius:999px;border:1px solid #444;background:#fff;color:#050505;font-weight:1000;cursor:pointer;margin-top:12px}.btn.red{background:var(--red);color:#fff;border-color:var(--red)}.btn:disabled{opacity:.6;cursor:wait}.msg{min-height:20px;color:#ff6574;font-size:12px;margin-top:12px;text-align:center}.success{color:#70e0a1}.profile{display:none}.profile.show{display:block}.auth.hide{display:none}.profile-card{border-top:1px solid #292929;margin-top:25px;padding-top:25px}.status{font-size:12px;color:#999;margin:12px 0}.logout{background:#111;color:#fff}.back{display:inline-block;color:#aaa;text-decoration:none;margin-top:25px;font-size:12px}.back:hover{color:#fff}
 </style>
 </head>
 <body>
@@ -18,57 +18,32 @@
     <h1>JOIN THE<br><span>WAR</span></h1>
     <p>Create your Gender Warz member account. Your membership will become your identity across the War Floor as we add voting, battle submissions, profiles and community features.</p>
   </section>
-
   <div class="panel auth" id="authPanel">
-    <div class="tabs">
-      <button class="tab active" id="signupTab" onclick="showMode('signup')">SIGN UP</button>
-      <button class="tab" id="loginTab" onclick="showMode('login')">LOG IN</button>
-    </div>
-
-    <div id="usernameField" class="field">
-      <label>Username</label>
-      <input class="input" id="username" maxlength="30" placeholder="Your War Floor name">
-    </div>
-    <div class="field">
-      <label>Email</label>
-      <input class="input" id="email" type="email" autocomplete="email" placeholder="you@example.com">
-    </div>
-    <div class="field">
-      <label>Password</label>
-      <input class="input" id="password" type="password" autocomplete="new-password" placeholder="At least 6 characters">
-    </div>
-    <button class="btn red" id="authButton" onclick="submitAuth()">CREATE MY ACCOUNT</button>
+    <div class="tabs"><button type="button" class="tab active" id="signupTab" onclick="showMode('signup')">SIGN UP</button><button type="button" class="tab" id="loginTab" onclick="showMode('login')">LOG IN</button></div>
+    <div id="usernameField" class="field"><label>Username</label><input class="input" id="username" maxlength="30" placeholder="Your War Floor name"></div>
+    <div class="field"><label>Email</label><input class="input" id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+    <div class="field"><label>Password</label><input class="input" id="password" type="password" autocomplete="new-password" placeholder="At least 6 characters"></div>
+    <button type="button" class="btn red" id="authButton" onclick="submitAuth()">CREATE MY ACCOUNT</button>
     <div class="msg" id="authMsg"></div>
   </div>
-
   <div class="panel profile" id="profilePanel">
-    <div class="tag">MEMBER PROFILE</div>
-    <h2 id="welcome">WELCOME TO THE WAR FLOOR</h2>
-    <div class="status" id="memberEmail"></div>
-    <div class="profile-card">
-      <div class="field"><label>Display Name</label><input class="input" id="displayName" maxlength="60" placeholder="Your display name"></div>
-      <div class="field"><label>Bio</label><input class="input" id="bio" maxlength="180" placeholder="Tell the War Floor who you are"></div>
-      <div class="field"><label>Your Side</label><select class="select" id="side"><option value="BOTH">BOTH</option><option value="MEN">MEN</option><option value="WOMEN">WOMEN</option></select></div>
-      <button class="btn red" onclick="saveProfile()">SAVE PROFILE</button>
-      <div class="msg" id="profileMsg"></div>
-      <button class="btn logout" onclick="signOut()">LOG OUT</button>
-    </div>
+    <div class="tag">MEMBER PROFILE</div><h2 id="welcome">WELCOME TO THE WAR FLOOR</h2><div class="status" id="memberEmail"></div>
+    <div class="profile-card"><div class="field"><label>Display Name</label><input class="input" id="displayName" maxlength="60" placeholder="Your display name"></div><div class="field"><label>Bio</label><input class="input" id="bio" maxlength="180" placeholder="Tell the War Floor who you are"></div><div class="field"><label>Your Side</label><select class="select" id="side"><option value="BOTH">BOTH</option><option value="MEN">MEN</option><option value="WOMEN">WOMEN</option></select></div><button type="button" class="btn red" onclick="saveProfile()">SAVE PROFILE</button><div class="msg" id="profileMsg"></div><button type="button" class="btn logout" onclick="signOut()">LOG OUT</button></div>
   </div>
-
   <div style="text-align:center"><a class="back" href="/">← BACK TO THE WAR FLOOR</a></div>
 </div>
 <script>
 const SUPABASE_URL='https://kyxxslzvjaqmyzcvafzy.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_Kq0y_C9lMNHqvX-o55oCJA_px3rtTG6';
-const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-let mode='signup';
-function showMode(next){mode=next;document.getElementById('signupTab').classList.toggle('active',mode==='signup');document.getElementById('loginTab').classList.toggle('active',mode==='login');document.getElementById('usernameField').style.display=mode==='signup'?'block':'none';document.getElementById('authButton').textContent=mode==='signup'?'CREATE MY ACCOUNT':'LOG IN';document.getElementById('password').autocomplete=mode==='signup'?'new-password':'current-password';document.getElementById('authMsg').textContent=''}
-async function submitAuth(){const email=document.getElementById('email').value.trim();const password=document.getElementById('password').value;const username=document.getElementById('username').value.trim();const msg=document.getElementById('authMsg');msg.className='msg';if(!email||!password||(mode==='signup'&&!username)){msg.textContent='Fill in all required fields.';return}if(mode==='signup'&&username.length<3){msg.textContent='Username must be at least 3 characters.';return}document.getElementById('authButton').disabled=true;let result;if(mode==='signup'){result=await supabase.auth.signUp({email,password,options:{data:{username,display_name:username}}})}else{result=await supabase.auth.signInWithPassword({email,password})}document.getElementById('authButton').disabled=false;if(result.error){msg.textContent=result.error.message;return}if(mode==='signup'&&!result.data.session){msg.className='msg success';msg.textContent='Account created. Check your email to confirm your membership, then log in.';return}await loadMember(result.data.user)}
-async function loadMember(user){if(!user)return;document.getElementById('authPanel').classList.add('hide');document.getElementById('profilePanel').classList.add('show');document.getElementById('memberEmail').textContent=user.email||'';const {data,error}=await supabase.from('profiles').select('username,display_name,bio,side').eq('id',user.id).maybeSingle();if(error){document.getElementById('profileMsg').textContent=error.message;return}if(data){document.getElementById('welcome').textContent='WELCOME, '+(data.display_name||data.username||'MEMBER').toUpperCase();document.getElementById('displayName').value=data.display_name||'';document.getElementById('bio').value=data.bio||'';document.getElementById('side').value=data.side||'BOTH'}}
-async function saveProfile(){const {data:{user}}=await supabase.auth.getUser();if(!user)return;const display_name=document.getElementById('displayName').value.trim();const bio=document.getElementById('bio').value.trim();const side=document.getElementById('side').value;const {error}=await supabase.from('profiles').update({display_name,bio,side,updated_at:new Date().toISOString()}).eq('id',user.id);const msg=document.getElementById('profileMsg');msg.className='msg '+(error?'':'success');msg.textContent=error?error.message:'Profile saved.';if(!error)document.getElementById('welcome').textContent='WELCOME, '+(display_name||'MEMBER').toUpperCase()}
-async function signOut(){await supabase.auth.signOut();document.getElementById('profilePanel').classList.remove('show');document.getElementById('authPanel').classList.remove('hide');showMode('login')}
-supabase.auth.onAuthStateChange((_event,session)=>{if(session)loadMember(session.user)});
-(async()=>{const {data}=await supabase.auth.getSession();if(data.session)loadMember(data.session.user)})();
+let supabaseClient=null,mode='signup';
+function setMsg(text,success=false){const m=document.getElementById('authMsg');m.className='msg'+(success?' success':'');m.textContent=text}
+function showMode(next){mode=next;document.getElementById('signupTab').classList.toggle('active',mode==='signup');document.getElementById('loginTab').classList.toggle('active',mode==='login');document.getElementById('usernameField').style.display=mode==='signup'?'block':'none';document.getElementById('authButton').textContent=mode==='signup'?'CREATE MY ACCOUNT':'LOG IN';document.getElementById('password').autocomplete=mode==='signup'?'new-password':'current-password';setMsg('')}
+async function submitAuth(){try{if(!supabaseClient){setMsg('The member system is still loading. Please tap again in a moment.');return}const email=document.getElementById('email').value.trim();const password=document.getElementById('password').value;const username=document.getElementById('username').value.trim();if(!email||!password||(mode==='signup'&&!username)){setMsg('Fill in all required fields.');return}if(mode==='signup'&&username.length<3){setMsg('Username must be at least 3 characters.');return}const button=document.getElementById('authButton');button.disabled=true;setMsg('Creating your account...');let result;if(mode==='signup'){result=await supabaseClient.auth.signUp({email,password,options:{data:{username,display_name:username}}})}else{result=await supabaseClient.auth.signInWithPassword({email,password})}button.disabled=false;if(result.error){setMsg(result.error.message);return}if(mode==='signup'&&!result.data.session){setMsg('Account created. Check your email to confirm your membership, then log in.',true);return}await loadMember(result.data.user)}catch(e){document.getElementById('authButton').disabled=false;setMsg(e?.message||'Something went wrong. Please try again.')}}
+async function loadMember(user){if(!user)return;document.getElementById('authPanel').classList.add('hide');document.getElementById('profilePanel').classList.add('show');document.getElementById('memberEmail').textContent=user.email||'';const {data,error}=await supabaseClient.from('profiles').select('username,display_name,bio,side').eq('id',user.id).maybeSingle();if(error){document.getElementById('profileMsg').textContent=error.message;return}if(data){document.getElementById('welcome').textContent='WELCOME, '+(data.display_name||data.username||'MEMBER').toUpperCase();document.getElementById('displayName').value=data.display_name||'';document.getElementById('bio').value=data.bio||'';document.getElementById('side').value=data.side||'BOTH'}}
+async function saveProfile(){const {data:{user}}=await supabaseClient.auth.getUser();if(!user)return;const display_name=document.getElementById('displayName').value.trim();const bio=document.getElementById('bio').value.trim();const side=document.getElementById('side').value;const {error}=await supabaseClient.from('profiles').update({display_name,bio,side,updated_at:new Date().toISOString()}).eq('id',user.id);const msg=document.getElementById('profileMsg');msg.className='msg '+(error?'':'success');msg.textContent=error?error.message:'Profile saved.';if(!error)document.getElementById('welcome').textContent='WELCOME, '+(display_name||'MEMBER').toUpperCase()}
+async function signOut(){await supabaseClient.auth.signOut();document.getElementById('profilePanel').classList.remove('show');document.getElementById('authPanel').classList.remove('hide');showMode('login')}
+function initAuth(){try{if(!window.supabase){setMsg('Member system could not load. Refresh the page and try again.');return}supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);supabaseClient.auth.onAuthStateChange((_event,session)=>{if(session)loadMember(session.user)});supabaseClient.auth.getSession().then(({data})=>{if(data.session)loadMember(data.session.user)})}catch(e){setMsg('Member system failed to start. Please refresh the page.')}}
+initAuth();
 </script>
 </body>
 </html>
